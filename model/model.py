@@ -41,15 +41,20 @@ class DepositoStrumenti:
         cnx=get_connection()
         cursore_dizionario=cnx.cursor(dictionary=True)
 
-        query = "SELECT * FROM deposito_strumenti"
+        query = "SELECT * FROM strumento"
         cursore_dizionario.execute(query)
 
 
         for riga in cursore_dizionario:
+            for chiave, valore in riga.items():
+                if type(valore).__name__ == 'Decimal':
+                    riga[chiave] = float(valore)
             self.lista_strumenti.append(riga)
 
         cursore_dizionario.close()
         cnx.close()
+
+        #print(f"DEBUG - Strumenti trovati dal database: {len(self.lista_strumenti)}")
 
         return self.lista_strumenti
 

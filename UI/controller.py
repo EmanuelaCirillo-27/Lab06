@@ -35,7 +35,14 @@ class Controller:
 
     def mostra_strumenti(self):
         strumenti = self._model.get_strumenti()
+
+        #print(f"DEBUG - Strumenti arrivati al controller: {strumenti}")
+
         for el in strumenti:
-            self._view.lista_strumenti.controls.append(el)
+
+            #print(f"DEBUG - Stampando elemento: {el}")
+
+            testo_strumento = ft.Text(f"Strumento: {el}")
+            self._view.lista_strumenti.controls.append(testo_strumento)
 
         self._view.update()
