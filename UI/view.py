@@ -82,8 +82,7 @@ class View:
             ft.Divider(),
 
             # Sezione 3
-            ft.Text("Strumenti", size=20),
-            pulsante_mostra,
+            ft.Row(spacing=50, controls=[ft.Text("Strumenti", size=20), pulsante_mostra]),
             self.lista_strumenti,
             ft.Divider(),
 

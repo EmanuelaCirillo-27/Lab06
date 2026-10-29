@@ -41,8 +41,12 @@ class Controller:
         for el in strumenti:
 
             #print(f"DEBUG - Stampando elemento: {el}")
+            if el['disponibile']==1:
+                testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Valore: {el['valore']} - Disponibile")
+            elif el['disponibile']==0:
+                testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Valore: {el['valore']} - Non disponibile")
 
-            testo_strumento = ft.Text(f"Strumento: {el}")
+
             self._view.lista_strumenti.controls.append(testo_strumento)
 
         self._view.update()
