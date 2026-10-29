@@ -13,7 +13,7 @@ class DepositoStrumenti:
     def __init__(self, nome, responsabile):
         self._nome = nome
         self._responsabile = responsabile
-        self.lista_strumenti = []
+
 
     @property
     def nome(self):
@@ -44,12 +44,17 @@ class DepositoStrumenti:
         query = "SELECT * FROM strumento"
         cursore_dizionario.execute(query)
 
+        self.lista_strumenti = []
 
         for riga in cursore_dizionario:
-            for chiave, valore in riga.items():
-                if type(valore).__name__ == 'Decimal':
-                    riga[chiave] = float(valore)
-            self.lista_strumenti.append(riga)
+            strumento=Strumento(riga['codice'], riga['tipo'], riga['marca'], riga['anno_acquisto'], riga['valore'], riga['disponibile'])
+            self.lista_strumenti.append(strumento)
+
+        #for riga in cursore_dizionario:
+            #for chiave, valore in riga.items():
+                #if type(valore).__name__ == 'Decimal':
+                    #riga[chiave] = float(valore)
+            #self.lista_strumenti.append(riga)
 
         cursore_dizionario.close()
         cnx.close()

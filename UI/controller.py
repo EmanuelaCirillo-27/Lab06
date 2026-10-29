@@ -36,17 +36,22 @@ class Controller:
     def mostra_strumenti(self):
         strumenti = self._model.get_strumenti()
 
+        self._view.lista_strumenti.controls.clear()
         #print(f"DEBUG - Strumenti arrivati al controller: {strumenti}")
 
         for el in strumenti:
 
+
             #print(f"DEBUG - Stampando elemento: {el}")
-            if el['disponibile']==1:
-                testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Valore: {el['valore']} - Disponibile")
-            elif el['disponibile']==0:
-                testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Valore: {el['valore']} - Non disponibile")
+            #if el['disponibile']==1:
+                #testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Anno di acquisto: {el['anno_acquisto']} - Valore: {el['valore']} - Disponibile")
+            #elif el['disponibile']==0:
+                #testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Anno di acquisto: {el['anno_acquisto']} - Valore: {el['valore']} - Non disponibile")
 
 
+            #self._view.lista_strumenti.controls.append(testo_strumento)
+
+            testo_strumento = ft.Text(str(el))
             self._view.lista_strumenti.controls.append(testo_strumento)
 
         self._view.update()
