@@ -39,19 +39,39 @@ class Controller:
         self._view.lista_strumenti.controls.clear()
         #print(f"DEBUG - Strumenti arrivati al controller: {strumenti}")
 
-        for el in strumenti:
+        if strumenti:
+            for el in strumenti:
+
+                testo_strumento = ft.Text(str(el))
+                self._view.lista_strumenti.controls.append(testo_strumento)
+
+        else:
+            self._view.lista_strumenti.controls.append(ft.Text("Database vuoto"))
+
+        self._view.update()
 
 
-            #print(f"DEBUG - Stampando elemento: {el}")
-            #if el['disponibile']==1:
-                #testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Anno di acquisto: {el['anno_acquisto']} - Valore: {el['valore']} - Disponibile")
-            #elif el['disponibile']==0:
-                #testo_strumento = ft.Text(f"{el['codice']}: {el['tipo']} {el['marca']} - Anno di acquisto: {el['anno_acquisto']} - Valore: {el['valore']} - Non disponibile")
+    def mostra_tipo(self):
 
+        tipo_inserito = self._view.input_tipo_strumento.value
 
-            #self._view.lista_strumenti.controls.append(testo_strumento)
+        self._view.input_tipo_strumento.value=""
 
-            testo_strumento = ft.Text(str(el))
-            self._view.lista_strumenti.controls.append(testo_strumento)
+        # Se il campo è vuoto
+        if not tipo_inserito:
+            return
+
+        tipo_strumenti = self._model.cerca_strumenti_per_tipo(tipo_inserito)
+
+        self._view.lista_strumenti_ricerca.controls.clear()
+
+        # Se la lista di strumenti per quel tipo indicato non è vuota
+        if tipo_strumenti:
+            for singolo in tipo_strumenti:
+                testo_tipo = ft.Text(str(singolo))
+                self._view.lista_strumenti_ricerca.controls.append(testo_tipo)
+        # Se è vuota
+        else:
+            self._view.lista_strumenti_ricerca.controls.append(ft.Text("Nessuno strumento trovato per quel tipo"))
 
         self._view.update()
